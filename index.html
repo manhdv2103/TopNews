@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="images/logo.png" />
+        <title>Top News</title>
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous" />
+        <script src="https://kit.fontawesome.com/e6576c5494.js" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="./css/style.css" />
+    </head>
+
+    <body>
+        <header class="fixed-top bg-dark">
+            <div class="navbar navbar-expand-md">
+                <div class="container-md px-md-4">
+                    <h1 class="text-white m-0 fw-bold">Top News</h1>
+
+                    <!-- Nút tìm kiếm và nút mở menu chọn chủ đề trên thiết bị màn hình nhỏ -->
+                    <div class="d-md-none">
+                        <button class="btn shadow-none" type="button" title="Search" data-bs-toggle="collapse" data-bs-target="#searchbar-collapse" aria-controls="searchbar-collapse" aria-expanded="false" aria-label="Toggle search bar">
+                            <i class="fas fa-lg fa-search text-white"></i>
+                        </button>
+
+                        <button class="btn shadow-none" type="button" title="Topics" data-bs-toggle="collapse" data-bs-target="#topics-collapse" aria-controls="topics-collapse" aria-expanded="false" aria-label="Toggle topics bar">
+                            <i class="fas fa-lg fa-bars text-white"></i>
+                        </button>
+                    </div>
+
+                    <!-- Thanh tìm kiếm -->
+                    <div id="searchbar-collapse" class="navbar-collapse collapse justify-content-end">
+                        <form id="search-form" class="pt-2 pt-md-0">
+                            <div class="input-group">
+                                <button class="btn btn-light shadow-none" type="button" title="Open search filters" data-bs-toggle="modal" data-bs-target="#filter-modal">
+                                    <i class="fas fa-filter text-black-50"></i>
+                                </button>
+
+                                <input id="search-input" class="form-control border-0 shadow-none" type="text" pattern="^(?=.*\S).+$" placeholder="Search for news" required />
+                                <input class="btn btn-primary" type="submit" value="Search" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thanh chọn chủ đề -->
+            <div id="topics-collapse" class="container-md navbar-collapse collapse d-md-block px-md-4">
+                <ul id="topics-bar" class="list-group list-group-horizontal-md overflow-auto pb-2 pb-md-0">
+                    <li class="flex-fill rounded">
+                        <label class="list-group-item bg-body text-white border-0 text-center text-nowrap">
+                            <input class="d-none" type="radio" name="topic" value="breaking-news" />
+                            Breaking news
+                        </label>
+                    </li>
+
+                    <li class="flex-fill rounded">
+                        <label class="list-group-item bg-body text-white border-0 text-center text-nowrap">
+                            <input class="d-none" type="radio" name="topic" value="world" />
+                            World
+                        </label>
+                    </li>
+
+                    <li class="flex-fill rounded">
+                        <label class="list-group-item bg-body text-white border-0 text-center text-nowrap">
+                            <input class="d-none" type="radio" name="topic" value="nation" />
+                            Nation
+                        </label>
+                    </li>
+
+                    <li class="flex-fill rounded">
+                        <label class="list-group-item bg-body text-white border-0 text-center text-nowrap">
+                            <input class="d-none" type="radio" name="topic" value="business" />
+                            Business
+                        </label>
+                    </li>
+
+                    <li class="flex-fill rounded">
+                        <label class="list-group-item bg-body text-white border-0 text-center text-nowrap">
+                            <input class="d-none" type="radio" name="topic" value="technology" />
+                            Technology
+                        </label>
+                    </li>
+
+                    <li class="flex-fill rounded">
+                        <label class="list-group-item bg-body text-white border-0 text-center text-nowrap">
+                            <input class="d-none" type="radio" name="topic" value="entertainment" />
+                            Entertainment
+                        </label>
+                    </li>
+
+                    <li class="flex-fill rounded">
+                        <label class="list-group-item bg-body text-white border-0 text-center text-nowrap">
+                            <input class="d-none" type="radio" name="topic" value="sports" />
+                            Sports
+                        </label>
+                    </li>
+
+                    <li class="flex-fill rounded">
+                        <label class="list-group-item bg-body text-white border-0 text-center text-nowrap">
+                            <input class="d-none" type="radio" name="topic" value="science" />
+                            Science
+                        </label>
+                    </li>
+
+                    <li class="flex-fill rounded">
+                        <label class="list-group-item bg-body text-white border-0 text-center text-nowrap">
+                            <input class="d-none" type="radio" name="topic" value="health" />
+                            Health
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <!-- Modal lọc các bài báo -->
+        <div id="filter-modal" class="modal" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <form id="filter-form" autocomplete="off">
+                        <div class="modal-header">
+                            <h3 class="modal-title">Search filters</h3>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="row mb-3">
+                                <label for="keywords" class="col-sm-3 col-lg-2 col-form-label">Keywords</label>
+                                <div class="col-sm-9 col-lg-10">
+                                    <input id="keywords" type="text" class="form-control form-control-sm filter-input" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="exact-match" class="col-sm-3 col-lg-2 col-form-label">Exact Match</label>
+                                <div class="col-sm-9 col-lg-10">
+                                    <input id="exact-match" type="text" class="form-control form-control-sm filter-input" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="exclude-words" class="col-sm-3 col-lg-2 col-form-label pe-1">Exclude words</label>
+                                <div class="col-sm-9 col-lg-10">
+                                    <input id="exclude-words" type="text" class="form-control form-control-sm filter-input" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-4 mb-lg-0">
+                                <div class="col-lg-6">
+                                    <div class="row mb-3">
+                                        <label for="topic" class="col-sm-3 col-lg-4 col-form-label pe-1">Topic</label>
+                                        <div class="col-sm-9 col-lg-8">
+                                            <select id="topic" name="topic" class="form-select form-select-sm filter-input">
+                                                <option value="" selected>Any topic</option>
+                                                <option value="breaking-news">Breaking news</option>
+                                                <option value="world">World</option>
+                                                <option value="nation">Nation</option>
+                                                <option value="business">Business</option>
+                                                <option value="technology">Technology</option>
+                                                <option value="entertainment">Entertainment</option>
+                                                <option value="sports">Sports</option>
+                                                <option value="science">Science</option>
+                                                <option value="health">Health</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="row">
+                                        <label for="country" class="col-sm-3 col-lg-4 text-lg-center col-form-label pe-1">Country</label>
+                                        <div class="col-sm-9 col-lg-8">
+                                            <select id="country" name="country" class="form-select form-select-sm filter-input">
+                                                <option value="" selected>Any country</option>
+                                                <option value="au">Australia</option>
+                                                <option value="br">Brazil</option>
+                                                <option value="ca">Canada</option>
+                                                <option value="cn">China</option>
+                                                <option value="eg">Egypt</option>
+                                                <option value="fr">France</option>
+                                                <option value="de">Germany</option>
+                                                <option value="gr">Greece</option>
+                                                <option value="hk">Hong Kong</option>
+                                                <option value="in">India</option>
+                                                <option value="ie">Ireland</option>
+                                                <option value="il">Israel</option>
+                                                <option value="it">Italy</option>
+                                                <option value="jp">Japan</option>
+                                                <option value="nl">Netherlands</option>
+                                                <option value="no">Norway</option>
+                                                <option value="pk">Pakistan</option>
+                                                <option value="pe">Peru</option>
+                                                <option value="ph">Philippines</option>
+                                                <option value="pt">Portugal</option>
+                                                <option value="ro">Romania</option>
+                                                <option value="ru">Russian</option>
+                                                <option value="sg">Singapore</option>
+                                                <option value="es">Spain</option>
+                                                <option value="se">Sweden</option>
+                                                <option value="ch">Switzerland</option>
+                                                <option value="tw">Taiwan</option>
+                                                <option value="ua">Ukraine</option>
+                                                <option value="gb">United Kingdom</option>
+                                                <option value="us">United States</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="start-date" class="col-sm-2 col-form-label pe-1">From</label>
+                                <div class="col-sm-4">
+                                    <input id="start-date" type="date" pattern="^((?!0000)\d{4})[-](0[1-9]|1[0-2])[-](0[1-9]|[12][0-9]|3[01])$" class="form-control form-control-sm filter-input" />
+                                </div>
+
+                                <label for="end-date" class="col-sm-2 text-sm-center col-form-label pe-1">To</label>
+                                <div class="col-sm-4">
+                                    <input id="end-date" type="date" pattern="^((?!0000)\d{4})[-](0[1-9]|1[0-2])[-](0[1-9]|[12][0-9]|3[01])$" class="form-control form-control-sm filter-input" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="sortby" class="col-sm-2 col-form-label pe-1">Sort by</label>
+                                <div class="col-sm-4">
+                                    <select id="sortby" name="sortby" class="form-select form-select-sm">
+                                        <option value="publishedAt" selected>Date</option>
+                                        <option value="relevance">Relevance</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-secondary">Clear</button>
+                            <button type="submit" class="btn btn-primary disabled">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phần thân chứa các bài báo -->
+        <main class="container-md pt-4 pb-2"></main>
+
+        <!-- Bản mẫu của một bài báo ở trạng thái loading -->
+        <template id="article-template">
+            <article class="card mb-3 placeholder-glow">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <div class="ratio ratio-16x9 h-100">
+                            <div class="card-img-top placeholder"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h2 class="card-title"><span class="placeholder col-7 rounded-pill"></span></h2>
+
+                            <p class="card-text description">
+                                <span class="placeholder col-11 rounded-pill"></span>
+                                <span class="placeholder col-12 rounded-pill"></span>
+                                <span class="placeholder col-9 rounded-pill"></span>
+                            </p>
+
+                            <p class="card-text footer-text">
+                                <small><span class="placeholder col-5 col-md-4 col-lg-3 rounded-pill"></span></small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </template>
+
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+        <script src="js/main.js"></script>
+        <script src="js/filter.js"></script>
+    </body>
+</html>
